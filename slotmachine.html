@@ -30,7 +30,6 @@
 
         <!-- Control the showing effect of setting part and the main part of the site. -->
         <script>
-
             $(document).ready(function(){
                 $('#drawer').drawer();
                 $('.js-trigger').click(function(){
@@ -57,8 +56,6 @@
           var indexOfList = 0;
           var awardName;
           var winner;
-
-
     </script>
 
       <!-- The setting part -->
@@ -82,7 +79,6 @@
               document.getElementById("awardList").appendChild(li);
               $('#award').val("");
           }
-
           function getIndexInList(n) {
               indexOfList = n;
               var str = "#" + n ;
@@ -97,7 +93,6 @@
               li.appendChild(text);
               document.getElementById("winnerList").appendChild(li);
           }
-
       </script>
       <div class="drawer-masta drawer-default drawer-masta-right" id="awardList">
           <nav　id="drawer-nav" class="drawer-nav " role="navigation">
@@ -107,9 +102,7 @@
               <ul class="nav drawer-nav-list">
                   <li id="test"><a>獎項<input type="text" id="award" placeholder="獎項名稱" class="form-control"></a></li>
                   <li><a>人數<input type="text" id="people" placeholder="1" class="form-control"></a></li>
-                <!--  <li><a id="fromTop">由上到下<input type="checkbox" name="checkbox2" class="checkbox"/></a></li>
-                  <li><a id="fromButtom">由下到上<input type="checkbox" name="checkbox2" class="checkbox" checked="checked"/></a></li>
--->               <li><button type="button" id="submit" class="btn btn-primary form-control" onclick="submit();" >加入</button></li>
+                  <li><button type="button" id="submit" class="btn btn-primary form-control" onclick="submit();" >加入</button></li>
               </ul>
               <hr/>
               <div class="drawer-brand">
@@ -117,11 +110,7 @@
               </div>
               <div >
               </div>
-
-
-
         </nav>
-
       </div>
       <div class="drawer-overlay ">
           <div class="site-masthead" role="main">
@@ -131,50 +120,37 @@
                   <div id="header" class="container">
                       <div class="row content">
                           <div class="col-md-12 col-lg-8 col-lg-offset-2 text-center">
-
-
-                              <div id="textMachine">
-
-
-                              <!--<div>IS AWESOME!</div>
-                              <div>ROCKS!</div>
-                              <div>IS EASY TO USE</div>
-                              <div>IS PRODUCT OF BOREDOM</div>-->
-                            </div>
-                            <script>
-                                for (var i in nameList) {
-                                  var li = document.createElement("div");
-                                  var text = document.createTextNode(nameList[i]);
-                                  li.appendChild(text);
-                                  document.getElementById("textMachine").appendChild(li);
-                                  console.log(nameList[i]);
-                                }
-                            </script>
-                            <script>
-                        			$(document).ready(function(){
-                        				var textMachine = $("#textMachine").slotMachine({
-                        					delay	: 500
-                        				});
-                        				function onComplete(active){
-                        				  $("#machine1Result").text("Index: "+this.active);
-                                //  winner = this.active.text();
-                                  alert(this.active);
-                        				}
-                        				$("#play").click(function(){
-                                  var rmItem = "#" + indexOfList;
-                                  trytry();
-                                  $(rmItem).remove();
-                        				  textMachine.shuffle(5, onComplete);
-                        				})
-                        			});
-                        		</script>
+                              <div id="textMachine"></div>
+                              <script>
+                                  for (var i in nameList) {
+                                      var li = document.createElement("div");
+                                      var text = document.createTextNode(nameList[i]);
+                                      li.appendChild(text);
+                                      document.getElementById("textMachine").appendChild(li);
+                                      console.log(nameList[i]);
+                                  }
+                              </script>
+                              <script>
+              			  $(document).ready(
+                                      function(){
+                        	          var textMachine = $("#textMachine").slotMachine({
+                        	              delay: 500
+                        	          });
+                        	          function onComplete(active){
+                                              alert(this.active);
+                        		  }
+                        		  $("#play").click(
+                                              function(){
+                                                  var rmItem = "#" + indexOfList;
+                                                  trytry();
+                                                  $(rmItem).remove();
+                        	                  textMachine.shuffle(5, onComplete);
+                        		      })
+                        		});
+                              </script>
                           </div>
-                        </div>
-                      <!--  <div id="machine1Result" class="col-xs-4 machineResult">Index: 0</div>-->
-
                       </div>
-
-
+                  </div>
                   <div id="auto_control" style="height:120px; padding-top: 2%;">
                       <button type="button" id="play" class="btn btn-primary">Start</button>
                       <button type="button" id="next" class="btn btn-primary">Next</button>
@@ -186,22 +162,11 @@
            <div>
                 <footer class="site-footer">
                     <div class="site-footer-inner container">
-                        <p>2014/09/28 / 作者：<a target="_blank" href="https://plus.google.com/u/0/111581397895385381775/posts">SamOU</a>
-                        <!--<br>Code licensed under the MIT license.--></p>
-                        <ul class="site-social">
-                            <!--
-                            <li>
-                              <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=blivesta&amp;repo=drawer&amp;type=fork&amp;count=true" width="100" height="20"></iframe>
-                            </li>-->
-
-                        </ul>
-
+                        <p>2016/01/17 / Author:<a target="_blank" href="https://github.com/Piicksarn">Piicksarn</a>
                     </div>
                 </footer>
             </div>
-        </div><!-- /.site-wrapper -->
-         </div>
-       trytrysee
+        </div>
+        </div>
      </body>
-
  </html>
