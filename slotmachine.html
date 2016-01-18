@@ -13,17 +13,21 @@
         <link rel="stylesheet" href="css/ashiba/ashiba.min.css">
         <link rel="stylesheet" href="css/bootstrap/bootstrap.css" >
         <link rel="stylesheet" href="css/slotmachine/style.css">
+        <link rel="stylesheet" href="css/jqueryui/jquery-ui.css">
 
         <!-- The source from other great javascript library -->
         <script src="js/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="js/libs/jqueryui//jquery-ui.js"></script>
         <script type="text/javascript" src="js/libs/jsxgraph/loadjsxgraph.js"></script>
         <script type="text/javascript" src="js/libs/drawer/js/jquery.drawer.js"></script>
         <script type="text/javascript" src="js/libs/bootstrap/button.js"></script>
         <script type="text/javascript" src="js/libs/bootstrap/bootstrap.js"></script>
         <script type="text/javascript" src="js/libs/slotMachine/jquery.slotmachine.min.js"></script>
         <script type="text/javascript" src="js/libs/bootstrap/bootstrap-progressbar.js"></script>
+        <script type="text/javascript" src="js/libs/bootstrap/bootstrap-modal.js"></script>
+        <script type="text/javascript" src="js/libs/bootstrap/collapse.js"></script>
         <script type="text/javascript" src="js/NameData.js"></script>
-
+        <script type="text/javascript" src="js/Award.js"></script>
 
         <!-- Make the website could present the chinese words. -->
         <meta charset="UTF-8">
@@ -34,11 +38,9 @@
                 $('#drawer').drawer();
                 $('.js-trigger').click(function(){
                     var selectVal = $('.js-select').val();
-                    chengeClass(selectVal);
                 });
                 $('.js-select').change(function(){
                     var valClass = $(this).val();
-                    chengeClass(valClass);
                 });
             });
             var closeDrawer = function() {
@@ -49,49 +51,33 @@
   <body class="site-home drawer drawer-right" id="drawer">
       <script>
           var nameData = new Name();
+          var award = new Award();
           var nameList = new Array();
           nameList = nameData.readFile();
+          var flagOfName = new Array();
+          for(var i = 0; i < nameList.length; i++) {
+              flagOfName[i] = 0;
+          }
           var awardElement = new Array();
-          var indexOfAward = 0;
+          var indexOfName = 0;
           var indexOfList = 0;
           var awardName;
           var winner;
-    </script>
+      </script>
 
       <!-- The setting part -->
       <div class="site-wrapper">
-          <a class="drawer-toggle btn btn-outline-white"> Settings </a>
+          <a class="drawer-toggle btn btn-outline-white"> 設定獎項 </a>
       </div>
       <script>
-        //dataBase = new AwardData();
           function submit() {
-              var value = document.getElementById('award').value;
-              var li = document.createElement("div");
-              var a = document.createElement("a");
-              var text = document.createTextNode(value);
-              awardElement.push(value);
-              li.setAttribute("style", "color:#fff; padding-left: 40px; font-size:20px;");
-              li.setAttribute("id", awardElement.length);
-              var func = "getIndexInList(" + awardElement.length + ");";
-              a.setAttribute("onclick",func);
-              a.appendChild(text)
-              li.appendChild(a);
-              document.getElementById("awardList").appendChild(li);
+              var str = document.getElementById("award").value;
+              if(str.trim() != "") {
+              award.setAward(document.getElementById('award').value);
+              award.showAwardList("awardList");
+              award.setModal("awardModal");
               $('#award').val("");
-          }
-          function getIndexInList(n) {
-              indexOfList = n;
-              var str = "#" + n ;
-              var str2 = $( str ).text();
-              awardName = str2;
-              document.getElementById("awardName").innerHTML = awardName;
-          }
-          function trytry() {
-              var li = document.createElement("div");
-              var text = document.createTextNode(awardName);
-              li.setAttribute("style", "color:#fff; padding-left: 40px; font-size:20px;");
-              li.appendChild(text);
-              document.getElementById("winnerList").appendChild(li);
+            }
           }
       </script>
       <div class="drawer-masta drawer-default drawer-masta-right" id="awardList">
@@ -101,71 +87,129 @@
               </div>
               <ul class="nav drawer-nav-list">
                   <li id="test"><a>獎項<input type="text" id="award" placeholder="獎項名稱" class="form-control"></a></li>
-                  <li><a>人數<input type="text" id="people" placeholder="1" class="form-control"></a></li>
                   <li><button type="button" id="submit" class="btn btn-primary form-control" onclick="submit();" >加入</button></li>
               </ul>
               <hr/>
               <div class="drawer-brand">
-                  <h3>獎項/人數</h3>
+                  <h3>獎項</h3>
               </div>
               <div >
               </div>
         </nav>
       </div>
+      <!-- End of the setting part-->
+
+      <script>
+          function getIndexInList(n) {
+              indexOfList = n;
+              var str = "#" + n ;
+              var str2 = $( str ).text();
+              awardName = str2;
+              alert(n);
+              document.getElementById("awardName").innerHTML = awardName;
+              $("#play").attr("disabled",false);
+
+            }
+          function trytry() {
+              var div = document.createElement("div");
+              var str = awardName  + "          " + nameList[indexOfName];
+              var text = document.createTextNode(str);
+              div.setAttribute("style", "background-color:#444; font-size:28px;");
+              div.setAttribute("class","well");
+              div.appendChild(text);
+              document.getElementById("winnerlist").appendChild(div);
+          }
+      </script>
+
+      <!-- The main part of the site-->
       <div class="drawer-overlay ">
           <div class="site-masthead" role="main">
-              <h1 id="awardName" >開獎囉!</h1>
-              <div class="container">
-                  <hr>
-                  <div id="header" class="container">
-                      <div class="row content">
-                          <div class="col-md-12 col-lg-8 col-lg-offset-2 text-center">
-                              <div id="textMachine"></div>
-                              <script>
-                                  for (var i in nameList) {
-                                      var li = document.createElement("div");
-                                      var text = document.createTextNode(nameList[i]);
-                                      li.appendChild(text);
-                                      document.getElementById("textMachine").appendChild(li);
-                                      console.log(nameList[i]);
-                                  }
-                              </script>
-                              <script>
-              			  $(document).ready(
-                                      function(){
-                        	          var textMachine = $("#textMachine").slotMachine({
-                        	              delay: 500
-                        	          });
-                        	          function onComplete(active){
-                                              alert(this.active);
-                        		  }
-                        		  $("#play").click(
-                                              function(){
-                                                  var rmItem = "#" + indexOfList;
-                                                  trytry();
-                                                  $(rmItem).remove();
-                        	                  textMachine.shuffle(5, onComplete);
-                        		      })
-                        		});
-                              </script>
+              <div class="toggler">
+                  <h1 id="awardName" >開獎囉!</h1>
+                  <div class="container">
+                      <hr>
+                      <div id="header" class="container">
+                          <div class="row content">
+                              <div class="col-md-12 col-lg-8 col-lg-offset-2 text-center">
+                                  <div id="textMachine"></div>
+                                  <script>
+                                      for (var i in nameList) {
+                                          var li = document.createElement("div");
+                                          var text = document.createTextNode(nameList[i]);
+                                          var idstr = "slotItemId" + i;
+                                          li.setAttribute("id", idstr);
+                                          li.appendChild(text);
+                                          document.getElementById("textMachine").appendChild(li);
+                                      }
+
+              			                  $(document).ready(
+                                          function(){
+                        	                     var textMachine = $("#textMachine").slotMachine({
+                        	                         delay: 500
+                        	                      });
+
+                        	                      function onComplete(active){
+                                                    indexOfName = this.active;
+                                                    if(flagOfName[this.active] == 0) {
+                                                        trytry();
+                                                        var rmItem = "#" + indexOfList;
+                                                        var rmBtnItem = "#btn" + indexOfList;
+                                                        $(rmBtnItem).remove();
+                                                        $(rmItem).remove();
+                                                        flagOfName[this.active] = 1;
+                                                    }
+                                                    else {
+                                                      alert("太幸運了！");
+
+                                                      textMachine.shuffle(5, onComplete);
+
+                                                    }
+                                                }
+                        		                    $("#play").click(
+                                                    function(){
+                                                        $("#play").attr("disabled",true);
+                        	                              textMachine.shuffle(5, onComplete);
+                        		                        })
+                        		          });
+                                  </script>
+                              </div>
                           </div>
-                      </div>
-                  </div>
-                  <div id="auto_control" style="height:120px; padding-top: 2%;">
-                      <button type="button" id="play" class="btn btn-primary">Start</button>
-                      <button type="button" id="next" class="btn btn-primary">Next</button>
-                  </div>
-                  <hr/>
-                  <div id="winnerList" style="height:180px;"></div>
-                </div>
-           </div>
-           <div>
-                <footer class="site-footer">
-                    <div class="site-footer-inner container">
+                     </div>
+                     <div id="auto_control" style="height:120px; padding-top: 2%;">
+                         <button type="button" id="play" class="btn btn-primary" disabled="true">Start</button>
+                         <button class="btn" type="button" data-toggle="collapse" data-target="#winnerlist" aria-expanded="false" aria-controls="winnerlist">得獎名單</button>
+                         <button type="button" class="btn" data-toggle="modal" data-target="#myModal">選擇獎項</button>
+                     </div>
+
+                     <!--Start of the modal part-->
+                     <div class="modal fade" id="myModal" role="dialog" >
+                         <div class="modal-dialog modal-lg" >
+                             <div class="modal-content" style="background-color:#444;">
+                                 <h4 class="modal-title">獎項</h4>
+                                 <div class="modal-body" id="awardModal">
+                                 </div>
+                                 <div class="modal-footer">
+                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                 </div>
+                             </div>
+                         </div>
+                     </div> <!-- End of the modal part-->
+
+                     <!--Start of the collapse part-->
+                     <div class="collapse" id="winnerlist"></div>
+                     <!-- End of the collapse part-->
+
+                     <hr/>
+                     <div id=winnerList style="height:180px;"></div>
+                 </div>
+             </div>
+             <div>
+                 <footer class="site-footer">
+                     <div class="site-footer-inner container">
                         <p>2016/01/17 / Author:<a target="_blank" href="https://github.com/Piicksarn">Piicksarn</a>
-                    </div>
-                </footer>
-            </div>
+                     </div>
+                 </footer>
+             </div>
         </div>
         </div>
      </body>
