@@ -9,16 +9,12 @@ Name.prototype = {
      reader.send(null);
      var content = reader.responseText;
      var list = content.split('\n');
+     var nList = new Array();
      for(var i in list) {
-       if(list[i].trim() == "")
-       list.splice(i, 1);
+       if(list[i].trim() != "")
+          nList.push(list[i]);
      }
-     console.log(list.length);
-
-     for(var i in list) {
-       console.log(list[i]);
-     }
-     return list;
+     return nList;
   },
   addElement: function(element) {
       alert(element);

@@ -13,7 +13,10 @@ Award.prototype = {
     var value = this.awardList[this.awardList.length - 1];
     var li = document.createElement("div");
     var text = document.createTextNode(value);
-    li.setAttribute("style", "color:#fff; padding-left: 50px; font-size:20px;");
+    var func = "editAward(" + this.awardList.length + ")";
+    li.setAttribute("style", "color:#fff; padding-left: 30px; font-size:20px;");
+    li.setAttribute("class", "drawer-default ");
+    li.setAttribute("onmouseover", func);
     li.setAttribute("id", this.awardList.length);
     li.appendChild(text);
     document.getElementById(divId).appendChild(li);
