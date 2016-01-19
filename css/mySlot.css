@@ -1,0 +1,81 @@
+.divItem {
+  background-color: #222;
+  color: #fff;
+  padding-left: 30px;
+  font-size:24px;
+  -webkit-box-shadow: inset 0 3px 9px rgba(0, 0, 0, .5);
+          box-shadow: inset 0 3px 9px rgba(0, 0, 0, .5);
+}
+.divItem:hover {
+  background-color: #00BFFF;
+}
+
+.btnOfItem {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 28px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  color: #fff;
+  background-color: #41b8da;
+  border-color: #fff;
+}
+
+.btnOfItem:hover {
+  color: #fff;
+  background-color: #3493ae;
+  border-color: #3493ae;
+}
+.btnOfItem:active {
+  color: #fff;
+  background-color: #276e82;
+  border-color: #276e82;
+}
+.btnOfItem:focus {
+  color: #fff;
+  background-color: #276e82;
+  border-color: #276e82;
+}
+.btnOfconfirm {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  magin: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  color: #fff;
+  background-color: #f0494e;
+  border-color: #f0494e;
+}
+.btnOfconfirm:hover {
+  color: #fff;
+  background-color: #bd161b;
+  border-color: #bd161b;
+}
+.btnOfconfirm:active {
+  color: #fff;
+  background-color: #760e11;
+  border-color: #760e11;
+}
