@@ -126,9 +126,9 @@ p.title{
 	font-family: 'Pathway Gothic One';
 	color: #ffffff;
     float: left;
-    font-size: 70px;
+    font-size: 98px;
     font-weight: 300;
-    line-height: 80px;
+    line-height: 100px;
     margin-top: 2px;
     margin-bottom: 20px;
     text-align: center;
@@ -229,8 +229,8 @@ p.title{
 
 
 #textMachine, #textMachine2{
-	width:520px;
-	height: 67px;
+	width:600px;
+	height: 101px;
 	overflow: hidden;
 	display: inline-block;
 	text-align: left;

@@ -9,7 +9,6 @@
         <title>尾牙抽獎</title>
 
         <!-- The relative css stylesheets. -->
-        <link rel="stylesheet" href="css/jsxgraph/jsxgraph.css" />
         <link rel="stylesheet" href="css/drawer/drawer.css">
         <link rel="stylesheet" href="css/ashiba/ashiba.min.css">
         <link rel="stylesheet" href="css/bootstrap/bootstrap.css" >
@@ -21,7 +20,6 @@
         <!-- The source from other great javascript library -->
         <script src="js/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="js/libs/jqueryui//jquery-ui.js"></script>
-        <script type="text/javascript" src="js/libs/jsxgraph/loadjsxgraph.js"></script>
         <script type="text/javascript" src="js/libs/drawer/js/jquery.drawer.js"></script>
         <script type="text/javascript" src="js/libs/bootstrap/button.js"></script>
         <script type="text/javascript" src="js/libs/bootstrap/bootstrap.js"></script>
@@ -40,13 +38,20 @@
         <script>
             $(document).ready(function(){
                 $('#drawer').drawer();
+                swal({
+                   title: "<span><b>1. 設定獎項<br>2. 選擇獎項<br>3.  開獎<span>",
+                   timer: 1000,
+                   showConfirmButton: false,
+                   type: "info",
+                   html: true
+                 });
             });
             var closeDrawer = function() {
                 $("#drawer").drawer("close");
             };
         </script>
   </head>
-  <body class="site-home drawer drawer-right" id="drawer">
+  <body class="site-home drawer drawer-right" id="drawer" style="background-color:#222">
       <script>
           var nameData = new Name();
           var award = new Award();
@@ -65,7 +70,7 @@
 
       <!-- The setting part -->
       <div class="site-wrapper">
-          <a class="drawer-toggle btn btn-outline-white"><i class="fa fa-cog fa-spin"></i>  設定獎項</a>
+          <a class="drawer-toggle btn btn-outline-white"><i class="fa fa-cog fa-spin"></i>設定獎項</a>
       </div>
       <script>
           function submit() {
@@ -95,22 +100,24 @@
             });
           }
       </script>
-      <div class="drawer-masta drawer-default drawer-masta-right" id="awardList">
+      <div class="drawer-masta drawer-default drawer-masta-right" id="awardList" >
           <nav　id="drawer-nav" class="drawer-nav" role="navigation">
-              <div>
-                  <h3>設定獎項</h3>
+              <div  style="height:50px;">
               </div>
-              <div>
+              <div style="text-align:center">
               <ul class="nav drawer-nav-list">
-                  <li id="test"><input type="text" id="award" placeholder="獎項名稱" class="form-control"></li>
+                  <li id="test"><input type="text" id="award" placeholder="請輸入獎項名稱" class="form-control"></li>
                   </br>
-                  <li><button type="button" id="submit" class="btn btn-primary " onclick="submit();" >加入</button></li>
               </ul>
+              <div>
+                  <button type="button" id="submit" class="btnOfconfirm" onclick="submit();" >加入</button></li>
+              </div>
             </div>
               <hr/>
-              <div class="drawer-brand drawer-default nav drawer-nav-list"></div>
-              <div >
+              <div style="text-align:center">
+                  <p style="color:#fff"><i class="fa fa-star fa-spin"></i> 點選項目可以刪除</p>
               </div>
+              <div class="drawer-brand drawer-default nav drawer-nav-list"></div>
         </nav>
       </div>
       <!-- End of the setting part-->
@@ -124,6 +131,11 @@
               awardName = str2;
               document.getElementById("awardName").innerHTML = awardName;
               $("#play").attr("disabled",false);
+              swal({
+                  title: "已選擇" + str2,
+                  timer: 1000,
+                  showConfirmButton: false
+              });
             }
 
           <!--the winner list-->
@@ -140,10 +152,11 @@
 
       <!-- The main part of the site-->
       <div class="drawer-overlay ">
-          <div class="site-masthead" role="main">
+          <div class="site-masthead" role="main"  style="background-image:url(bmImg.png); background-size:100%;background-repeat:no-repeat;">
               <div class="toggler">
-                  <h1 id="awardName" >開獎囉!</h1>
-                  <div class="container">
+
+                  <div class="container" style="background:rgba(30%,0%,0%,0.6);">
+                    <h1 id="awardName" >開獎囉!</h1>
                       <hr>
                       <div id="header" class="container">
                           <div class="row content">
@@ -151,6 +164,7 @@
                                   <div id="textMachine"></div>
                                   <script>
                                       for (var i in nameList) {
+                                          console.log(nameList[i]);
                                           var li = document.createElement("div");
                                           var text = document.createTextNode(nameList[i]);
                                           var idstr = "slotItemId" + i;
@@ -161,22 +175,39 @@
               			                  $(document).ready(
                                           function(){
                         	                     var textMachine = $("#textMachine").slotMachine({
-                        	                         delay: 500
+                        	                         delay: 500,
+                                                   active: 0
                         	                      });
                         	                      function onComplete(active){
-                                                    indexOfName = this.active;
+                                                    indexOfName = this.active + 1;
                                                     if(flagOfName[this.active] == 0) {
                                                         trytry();
                                                         var rmItem = "#" + indexOfList;
                                                         var rmBtnItem = "#btn" + indexOfList;
+                                                        var str = "得獎者 ：" + nameList[indexOfName];
                                                         $(rmBtnItem).remove();
                                                         $(rmItem).remove();
                                                         flagOfName[this.active] = 1;
+                                                        swal({
+                                                            title: str,
+                                                            timer: 2000,
+                                                            showConfirmButton: false
+                                                        });
                                                     }
                                                     else {
-                                                      alert("重複中獎,再試一次~!");
-                                                      textMachine.shuffle(5, onComplete);
-                                                    }
+                                                        swal({
+                                                            title: "重覆中獎",
+                                                            type: "warning",
+                                                            showCancelButton: true,
+                                                            confirmButtonColor: "#DD6B55",
+                                                            confirmButtonText: "再試一次",
+                                                            closeOnConfirm: true
+                                                            },
+                                                            function(){
+                                                               textMachine.shuffle(5, onComplete);
+                                                            }
+                                                        );
+                                                     }
                                                 }
                         		                    $("#play").click(
                                                     function(){
@@ -189,7 +220,7 @@
                               </div>
                           </div>
                      </div>
-                     <div id="auto_control" style="height:120px; padding-top: 2%;">
+                     <div id="auto_control" style="height:80px; padding-top: 2%;">
                          <button type="button" id="play" class="btn btn-primary" disabled="true">Start</button>
                          <button class="btn" type="button" data-toggle="collapse" data-target="#winnerlist" aria-expanded="false" aria-controls="winnerlist"><i class="fa fa-chevron-circle-down"></i>
 得獎名單</button>
@@ -199,40 +230,25 @@
                      <!--Start of the modal part-->
                      <div class="modal fade" id="myModal" role="dialog" >
                          <div class="modal-dialog modal-lg" >
-                             <div class="modal-content" style="background-color:#444;">
+                             <div class="modal-content" style="background-color:#555;">
                                  <h4 class="modal-title">獎項</h4>
-                                 <div class="modal-body" id="awardModal">
-                                 </div>
-                                 <div class="modal-footer">
-                                     <button type="button" class="btn btn-default" data-dismiss="modal">確定</button>
-                                 </div>
+                                 <hr>
+                                 <div class="modal-body" id="awardModal"></div>
                              </div>
                          </div>
                      </div> <!-- End of the modal part-->
-
+                     <hr>
                      <!--Start of the collapse part-->
-                     <div class="collapse" id="winnerlist"></div>
-                     <!-- End of the collapse part-->
+                     <div  style="overflow:scroll; height:130px;">
+                          <div class="collapse" id="winnerlist" style="overflow:auto;background-size:cover;"></div>
+                          <!-- End of the collapse part-->
+                     </div>
 
-                     <hr/>
-                     <div id=winnerList style="height:180px;"></div>
                  </div>
              </div>
-             <div>
-
-            </div>
-                 <footer class="site-footer">
-                     <div class="site-footer-inner container">
-                        <p>2016/01/17 / Author:<a target="_blank" href="https://github.com/Piicksarn">Piicksarn</a>
-                     </div>
-                 </footer>
-             </div>
+        <div>
              <div class="block whiteblock footerblock bg-blue">
-              <div class="triangle white"></div>
-              <div class="block-container">
-                  <i class="fa fa-code"></i> with JavaScript and <i class="fa fa-heart pulse"></i> from Romania by <a href="http://ionicabizau.net">Ionică Bizău</a>
-              </div>
-        </div>
+                  <div class="footer text-center">&copy; 2016 • <a target="_blank" href="https://github.com/Piicksarn"><i class="fa fa-github"></i> Piicksarn</a> - Created with JavaScript.
         </div>
      </body>
  </html>
