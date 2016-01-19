@@ -27,7 +27,7 @@ Award.prototype = {
     var str = "btn"+this.awardList.length;
     var func = "getIndexInList(" + this.awardList.length + ");";
     btn.setAttribute("type","button");
-    btn.setAttribute("class", "btn");
+    btn.setAttribute("class", "btnOfItem");
     btn.setAttribute("id", str);
     btn.setAttribute("onclick", func);
     btn.appendChild(text);

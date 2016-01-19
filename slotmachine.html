@@ -5,6 +5,7 @@
 -->
  <html>
     <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
         <title>尾牙抽獎</title>
 
         <!-- The relative css stylesheets. -->
@@ -14,6 +15,7 @@
         <link rel="stylesheet" href="css/bootstrap/bootstrap.css" >
         <link rel="stylesheet" href="css/slotmachine/style.css">
         <link rel="stylesheet" href="css/jqueryui/jquery-ui.css">
+        <link rel="stylesheet" href="css/sweetalert/sweetalert.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/mySlot.css" />
         <!-- The source from other great javascript library -->
@@ -27,6 +29,7 @@
         <script type="text/javascript" src="js/libs/bootstrap/bootstrap-progressbar.js"></script>
         <script type="text/javascript" src="js/libs/bootstrap/bootstrap-modal.js"></script>
         <script type="text/javascript" src="js/libs/bootstrap/collapse.js"></script>
+        <script type="text/javascript" src="js/libs/sweetalert/sweetalert.min.js"></script>
         <script type="text/javascript" src="js/NameData.js"></script>
         <script type="text/javascript" src="js/Award.js"></script>
 
@@ -75,8 +78,21 @@
             }
           }
           function editAward(index) {
-            alert("teah("+index+")");
-
+            swal({
+                title: "要刪掉這個項目嗎?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "刪除",
+                closeOnConfirm: false
+             },
+                function(){
+                    swal("已刪除項目!","","success");
+                    var rmItem = "#" + index;
+                    var rmBtnItem = "#btn" + index;
+                    $(rmBtnItem).remove();
+                    $(rmItem).remove();
+            });
           }
       </script>
       <div class="drawer-masta drawer-default drawer-masta-right" id="awardList">
@@ -100,6 +116,7 @@
       <!-- End of the setting part-->
 
       <script>
+          <!--Show the award name when shoffling-->
           function getIndexInList(n) {
               indexOfList = n;
               var str = "#" + n ;
@@ -108,6 +125,8 @@
               document.getElementById("awardName").innerHTML = awardName;
               $("#play").attr("disabled",false);
             }
+
+          <!--the winner list-->
           function trytry() {
               var div = document.createElement("div");
               var str = awardName  + "          " + nameList[indexOfName];
@@ -185,7 +204,7 @@
                                  <div class="modal-body" id="awardModal">
                                  </div>
                                  <div class="modal-footer">
-                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                     <button type="button" class="btn btn-default" data-dismiss="modal">確定</button>
                                  </div>
                              </div>
                          </div>
