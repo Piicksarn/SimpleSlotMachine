@@ -14,7 +14,8 @@
         <link rel="stylesheet" href="css/bootstrap/bootstrap.css" >
         <link rel="stylesheet" href="css/slotmachine/style.css">
         <link rel="stylesheet" href="css/jqueryui/jquery-ui.css">
-         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/mySlot.css" />
         <!-- The source from other great javascript library -->
         <script src="js/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="js/libs/jqueryui//jquery-ui.js"></script>
@@ -61,7 +62,7 @@
 
       <!-- The setting part -->
       <div class="site-wrapper">
-          <a class="drawer-toggle btn btn-outline-white"> 設定獎項 </a>
+          <a class="drawer-toggle btn btn-outline-white"><i class="fa fa-cog fa-spin"></i>  設定獎項</a>
       </div>
       <script>
           function submit() {
@@ -74,13 +75,13 @@
             }
           }
           function editAward(index) {
-
+            alert("teah("+index+")");
 
           }
       </script>
       <div class="drawer-masta drawer-default drawer-masta-right" id="awardList">
           <nav　id="drawer-nav" class="drawer-nav" role="navigation">
-              <div class="drawer-brand">
+              <div>
                   <h3>設定獎項</h3>
               </div>
               <div>
@@ -91,7 +92,7 @@
               </ul>
             </div>
               <hr/>
-              <div class="drawer-brand drawer-default nav drawer-nav-list"> </div>
+              <div class="drawer-brand drawer-default nav drawer-nav-list"></div>
               <div >
               </div>
         </nav>
@@ -118,16 +119,6 @@
           }
       </script>
 
-      <div class="btn-group open">
-
-        <ul class="dropdown-menu">
-          <li><a href="#"><i class="fa fa-pencil fa-fw"></i> Edit</a></li>
-          <li><a href="#"><i class="fa fa-trash-o fa-fw"></i> Delete</a></li>
-          <li><a href="#"><i class="fa fa-ban fa-fw"></i> Ban</a></li>
-          <li class="divider"></li>
-          <li><a href="#"><i class="i"></i> Make admin</a></li>
-        </ul>
-      </div>
       <!-- The main part of the site-->
       <div class="drawer-overlay ">
           <div class="site-masthead" role="main">
@@ -173,15 +164,17 @@
                                                         $("#play").attr("disabled",true);
                         	                              textMachine.shuffle(5, onComplete);
                         		                        })
-                        		          });
+                        		              }
+                                    );
                                   </script>
                               </div>
                           </div>
                      </div>
                      <div id="auto_control" style="height:120px; padding-top: 2%;">
                          <button type="button" id="play" class="btn btn-primary" disabled="true">Start</button>
-                         <button class="btn" type="button" data-toggle="collapse" data-target="#winnerlist" aria-expanded="false" aria-controls="winnerlist">得獎名單</button>
-                         <button type="button" class="btn" data-toggle="modal" data-target="#myModal">選擇獎項</button>
+                         <button class="btn" type="button" data-toggle="collapse" data-target="#winnerlist" aria-expanded="false" aria-controls="winnerlist"><i class="fa fa-chevron-circle-down"></i>
+得獎名單</button>
+                         <button type="button" class="btn" data-toggle="modal" data-target="#myModal"><i class="fa fa-gratipay"></i> 選擇獎項</button>
                      </div>
 
                      <!--Start of the modal part-->

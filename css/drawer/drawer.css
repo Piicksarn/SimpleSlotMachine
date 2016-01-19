@@ -135,6 +135,9 @@
   color: #444;
   text-decoration: none;
 }
+.drawer-default + .drawer-brand div:hover {
+  background-color: #fff;
+}
 .drawer-default li a {
   padding: 15px;
   color: #888;
